@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+          <title>gallery_ready</title>
+          <meta charset="utf-8" />
+          <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+          <script>
+                    $(document).ready(function(){
+                              var width = $("[data-role='slider']").attr("data-width");
+                              var height = $("[data-role='slider']").attr("data-height");
+                              var count = $("[data-role='slider'] div.item").length;
+
+                              $("[data-role='slider']").css({
+                                        position : "relative",
+                                        overflow : "hidden",
+                                        width : width,
+                                        height : height
+                              }).find(".container").css({
+                                        position : "absolute",
+                                        width : count * width,
+                                        overflow : "hidden"
+                              }).find(".item").css({
+                                        width : width,
+                                        height : height,
+                                        float : "left"
+                              });
+                    });
+
+                    $(document).ready(function(){
+                              var currentPage=0;
+                              var changePage=function(){
+                                        $("[data-role='slider'] > .container").animate({
+                                                  left : -currentPage * width
+                                        },500);
+                              };
+
+                              $("#left-button").click(function(){
+                                        if(currentPage > 0)
+                                        {
+                                                  currentPage = currentPage -1;
+                                                  changePage();
+                                        }
+                              });
+                              $("right-button").click(function(){
+                                        if(currentPage < count -1)
+                                        {
+                                                  currentPage=currentPage +1;
+                                                  changePage();
+                                        }
+                              });
+                    });
+          </script>
+          <style>
+                    div.item:nth-child(1)         { background : blueviolet; }
+                    div.item:nth-child(2)         { background : pink; }
+                    div.item:nth-child(3)         { background-color : burlywood; }
+          </style>
+</head>
+<body>
+          <div data-role="slider" data-width="500" data-height="300">
+                    <div class="container">
+                              <div class="item">
+                                        <h1>adfk;ajfdskaj</h1>
+                                        <p>a;ldksjfa;lfjal;fjal;kfsja;lkfja;lsfk</p>
+                              </div>
+                              <div class="item">
+                                        <h1>a;kljfalsk;fja;slfkd</h1>
+                                        <p>a;lkjdf;alkfja;klfjdaalf;a</p>
+                              </div>
+                              <div class="item">
+                                        <h1>a;ldkjfa;lkfja;lfkjasf;ka</h1>
+                                        <p>daj;fja;klfja;lkfjafl;kaslkd;fjasfklj</p>
+                              </div>
+                    </div>
+          </div>
+
+          <button id="left-button">왼쪽</button>
+          <button id="right-button">오른쪽</button>
+</body>
+</html>
